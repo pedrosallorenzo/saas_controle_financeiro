@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wireframes MVP - SaaS Controle Financeiro</title>
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --paper: #fafaf7;
+    --line: #1a1a1a;
+    --muted: #888;
+    --accent: #ff6b35;
+    --grid: #e8e8e3;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Courier New', Courier, monospace;
+    background: var(--paper);
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 20px 20px;
+    color: var(--ink);
+    padding: 40px 20px;
+    min-height: 100vh;
+  }
+  .doc-header {
+    max-width: 1200px;
+    margin: 0 auto 40px;
+    padding: 20px;
+    border: 2px solid var(--ink);
+    background: var(--paper);
+  }
+  .doc-header h1 {
+    font-size: 1.6em;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .doc-header p { color: var(--muted); font-size: 0.85em; }
+  .doc-header .legend {
+    margin-top: 12px;
+    font-size: 0.8em;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .doc-header .legend span::before {
+    content: "■ ";
+    color: var(--accent);
+  }
+  .screens-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: 40px;
+  }
+  .screen {
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    padding: 0;
+    position: relative;
+  }
+  .screen-label {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 8px 14px;
+    font-size: 0.75em;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .screen-label .num {
+    background: var(--accent);
+    padding: 2px 8px;
+    margin-right: 8px;
+  }
+  .device-frame {
+    padding: 20px;
+    min-height: 580px;
+    position: relative;
+  }
+  .annotation {
+    background: #fff8e6;
+    border-left: 3px solid var(--accent);
+    padding: 10px 14px;
+    margin: 0 20px 20px;
+    font-size: 0.78em;
+    font-family: 'Courier New', monospace;
+    line-height: 1.5;
+  }
+  .annotation b { text-transform: uppercase; font-size: 0.9em; }
+
+  /* Wireframe primitives */
+  .wf-box {
+    border: 1.5px solid var(--ink);
+    padding: 10px;
+    margin-bottom: 10px;
+    background: var(--paper);
+  }
+  .wf-input {
+    border: 1.5px solid var(--ink);
+    padding: 10px;
+    margin-bottom: 10px;
+    background: white;
+    color: var(--muted);
+    font-family: inherit;
+    font-size: 0.9em;
+  }
+  .wf-button {
+    border: 1.5px solid var(--ink);
+    background: var(--ink);
+    color: var(--paper);
+    padding: 10px;
+    text-align: center;
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-family: inherit;
+    font-size: 0.85em;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+  .wf-button.secondary {
+    background: var(--paper);
+    color: var(--ink);
+  }
+  .wf-button.ghost {
+    background: transparent;
+    border: 1.5px dashed var(--ink);
+    color: var(--ink);
+  }
+  .wf-title {
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .wf-subtitle {
+    font-size: 0.8em;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+  .wf-divider {
+    border-top: 1.5px dashed var(--ink);
+    margin: 16px 0;
+  }
+  .wf-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px dashed var(--muted);
+    font-size: 0.85em;
+  }
+  .wf-row:last-child { border-bottom: none; }
+  .wf-pill {
+    display: inline-block;
+    border: 1.5px solid var(--ink);
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75em;
+    margin: 2px;
+    background: var(--paper);
+  }
+  .wf-pill.selected {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .wf-card-stat {
+    border: 1.5px solid var(--ink);
+    padding: 12px;
+    text-align: center;
+  }
+  .wf-card-stat .label {
+    font-size: 0.7em;
+    text-transform: uppercase;
+    color: var(--muted);
+    letter-spacing: 1px;
+  }
+  .wf-card-stat .value {
+    font-size: 1.3em;
+    font-weight: bold;
+    margin-top: 4px;
+  }
+  .wf-bar {
+    height: 18px;
+    background: var(--ink);
+    margin: 4px 0;
+  }
+  .wf-bar.b1 { width: 80%; }
+  .wf-bar.b2 { width: 55%; }
+  .wf-bar.b3 { width: 35%; }
+  .wf-tag {
+    display: inline-block;
+    border: 1.5px solid var(--ink);
+    padding: 2px 8px;
+    font-size: 0.7em;
+    background: var(--accent);
+    color: var(--paper);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .flow-arrow {
+    text-align: center;
+    font-size: 1.5em;
+    color: var(--accent);
+    grid-column: 1 / -1;
+    margin: -20px 0;
+  }
+  .footnote {
+    max-width: 1200px;
+    margin: 60px auto 0;
+    padding: 20px;
+    border: 2px dashed var(--muted);
+    font-size: 0.85em;
+    line-height: 1.6;
+  }
+  .footnote h3 {
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .footnote ul { margin-left: 20px; }
+  .footnote li { margin-bottom: 6px; }
+</style>
+</head>
+<body>
+
+<div class="doc-header">
+  <h1>Wireframes MVP — SaaS Controle Financeiro</h1>
+  <p>Baixa fidelidade · Foco em estrutura e fluxo · 6 telas essenciais</p>
+  <div class="legend">
+    <span>Anotação laranja = decisão importante de UX</span>
+    <span>Caixas tracejadas = áreas opcionais ou estados vazios</span>
+  </div>
+</div>
+
+<div class="screens-grid">
+
+  <!-- TELA 1: AUTH -->
+  <div class="screen">
+    <div class="screen-label"><span><span class="num">01</span>Cadastro / Login</span><span>Auth</span></div>
+    <div class="device-frame">
+      <div class="wf-title">Bem-vindo</div>
+      <div class="wf-subtitle">Seu dinheiro, sem planilhas.</div>
+      <div class="wf-divider"></div>
+      <div class="wf-input">email@exemplo.com</div>
+      <div class="wf-input">••••••••</div>
+      <div class="wf-button">Entrar</div>
+      <div class="wf-button secondary">Criar conta</div>
+      <div style="text-align: center; font-size: 0.75em; margin-top: 16px; color: var(--muted);">
+        Esqueci minha senha
+      </div>
+    </div>
+    <div class="annotation">
+      <b>Decisão UX:</b> Sem login social no MVP. Adiciona fricção de configurar OAuth e não muda nada na validação da hipótese.
+    </div>
+  </div>
+
+  <!-- TELA 2: ONBOARDING -->
+  <div class="screen">
+    <div class="screen-label"><span><span class="num">02</span>Onboarding (3 passos)</span><span>1 de 3</span></div>
+    <div class="device-frame">
+      <div class="wf-title">Qual seu perfil?</div>
+      <div class="wf-subtitle">Vamos montar uma estrutura inicial pra você.</div>
+      <div class="wf-divider"></div>
+      <div class="wf-box">○ Estudante</div>
+      <div class="wf-box" style="background: var(--ink); color: var(--paper);">● Estagiário</div>
+      <div class="wf-box">○ CLT</div>
+      <div class="wf-box">○ Freelancer</div>
+      <div class="wf-box">○ Outro</div>
+      <div class="wf-divider"></div>
+      <div class="wf-button">Próximo →</div>
+      <div style="text-align: center; font-size: 0.75em; color: var(--muted);">
+        ● ○ ○
+      </div>
+    </div>
+    <div class="annotation">
+      <b>Decisão UX:</b> 3 perguntas no total. As respostas viram contexto pra IA criar as categorias iniciais automaticamente. Skip permitido — não bloqueie o usuário.
+    </div>
+  </div>
+
+  <!-- TELA 3: LANÇAMENTO NL + CONFIRMAÇÃO -->
+  <div class="screen">
+    <div class="screen-label"><span><span class="num">03</span>Lançamento por linguagem natural</span><span>Coração do produto</span></div>
+    <div class="device-frame">
+      <div class="wf-title">Conta pra mim</div>
+      <div class="wf-subtitle">Ex: "Gastei 42 no almoço hoje"</div>
+      <div class="wf-input" style="min-height: 60px; color: var(--ink);">Gastei 42 no almoço hoje</div>
+      <div class="wf-button">Registrar</div>
+
+      <div class="wf-divider"></div>
+      <div style="font-size: 0.75em; color: var(--muted); margin-bottom: 8px;">
+        ↓ APÓS A IA PROCESSAR ↓
+      </div>
+
+      <div class="wf-box" style="background: white;">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+          <span class="wf-tag">Despesa</span>
+          <span style="font-weight: bold;">R$ 42,00</span>
+        </div>
+        <div class="wf-row">
+          <span>Categoria</span><span><b>Alimentação</b> ✎</span>
+        </div>
+        <div class="wf-row">
+          <span>Data</span><span><b>Hoje, 11/05</b> ✎</span>
+        </div>
+        <div class="wf-row">
+          <span>Descrição</span><span><b>Almoço</b> ✎</span>
+        </div>
+      </div>
+      <div class="wf-button">✓ Confirmar</div>
+      <div class="wf-button ghost">Cancelar</div>
+    </div>
+    <div class="annotation">
+      <b>Decisão UX inegociável:</b> O card de confirmação SEMPRE aparece antes de salvar. Cada campo é editável com 1 toque. Sem essa tela, erro de IA vira frustração silenciosa.
+    </div>
+  </div>
+
+  <!-- TELA 4: DASHBOARD -->
+  <div class="screen">
+    <div class="screen-label"><span><span class="num">04</span>Dashboard</span><span>Home</span></div>
+    <div class="device-frame">
+      <div class="wf-title">Maio / 2026</div>
+      <div class="wf-subtitle">Como você está agora</div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 16px;">
+        <div class="wf-card-stat">
+          <div class="label">Receitas</div>
+          <div class="value">R$ 1.900</div>
+        </div>
+        <div class="wf-card-stat">
+          <div class="label">Despesas</div>
+          <div class="value">R$ 1.247</div>
+        </div>
+      </div>
+      <div class="wf-card-stat" style="margin-bottom: 16px; background: var(--ink); color: var(--paper);">
+        <div class="label" style="color: var(--paper);">Saldo do mês</div>
+        <div class="value">+ R$ 653</div>
+      </div>
+
+      <div style="font-size: 0.85em; font-weight: bold; margin-bottom: 8px; text-transform: uppercase;">
+        Top categorias
+      </div>
+      <div style="font-size: 0.8em;">Alimentação · R$ 487</div>
+      <div class="wf-bar b1"></div>
+      <div style="font-size: 0.8em;">Transporte · R$ 312</div>
+      <div class="wf-bar b2"></div>
+      <div style="font-size: 0.8em;">Lazer · R$ 198</div>
+      <div class="wf-bar b3"></div>
+
+      <div class="wf-divider"></div>
+      <div class="wf-button">+ Novo lançamento</div>
+    </div>
+    <div class="annotation">
+      <b>Decisão UX:</b> 3 números + top categorias. Só isso. Sem gráficos de pizza, sem evolução temporal, sem comparação com mês passado. Iniciantes confundem "informação" com "valor".
+    </div>
+  </div>
+
+  <!-- TELA 5: LISTA DE TRANSAÇÕES -->
+  <div class="screen">
+    <div class="screen-label"><span><span class="num">05</span>Lista de transações</span><span>Histórico</span></div>
+    <div class="device-frame">
+      <div class="wf-title">Tudo o que rolou</div>
+      <div class="wf-subtitle">Cronológico · toque pra editar</div>
+      <div class="wf-divider"></div>
+
+      <div style="font-size: 0.75em; color: var(--muted); text-transform: uppercase; margin-bottom: 4px;">Hoje</div>
+      <div class="wf-row">
+        <span>🍽 Almoço<br><small style="color: var(--muted);">Alimentação</small></span>
+        <span style="color: #c0392b;">− R$ 42,00</span>
+      </div>
+      <div class="wf-row">
+        <span>🚗 Uber<br><small style="color: var(--muted);">Transporte</small></span>
+        <span style="color: #c0392b;">− R$ 18,00</span>
+      </div>
+
+      <div style="font-size: 0.75em; color: var(--muted); text-transform: uppercase; margin: 12px 0 4px;">Ontem</div>
+      <div class="wf-row">
+        <span>💪 Academia<br><small style="color: var(--muted);">Academia</small></span>
+        <span style="color: #c0392b;">− R$ 89,90</span>
+      </div>
+      <div class="wf-row">
+        <span>💰 PIX da mãe<br><small style="color: var(--muted);">Transferência</small></span>
+        <span style="color: #27ae60;">+ R$ 200,00</span>
+      </div>
+
+      <div style="font-size: 0.75em; color: var(--muted); text-transform: uppercase; margin: 12px 0 4px;">Sex, 09/05</div>
+      <div class="wf-row">
+        <span>📺 Netflix<br><small style="color: var(--muted);">Assinaturas</small></span>
+        <span style="color: #c0392b;">− R$ 55,90</span>
+      </div>
+    </div>
+    <div class="annotation">
+      <b>Decisão UX:</b> Agrupamento por dia. Toque na linha = abre tela de edição. Swipe lateral = deletar (com undo). Sem busca, sem filtros no MVP.
+    </div>
+  </div>
+
+  <!-- TELA 6: PERGUNTE À IA -->
+  <div class="screen">
+    <div class="screen-label"><span><span class="num">06</span>Pergunte à IA</span><span>Consulta NL</span></div>
+    <div class="device-frame">
+      <div class="wf-title">Pergunte qualquer coisa</div>
+      <div class="wf-subtitle">Sobre seus gastos, receitas, padrões.</div>
+      <div class="wf-divider"></div>
+
+      <div style="margin-bottom: 8px; font-size: 0.75em; color: var(--muted);">Sugestões:</div>
+      <span class="wf-pill">Quanto gastei esse mês?</span>
+      <span class="wf-pill">Maior gasto da semana?</span>
+      <span class="wf-pill">Gasto com alimentação?</span>
+
+      <div class="wf-divider"></div>
+
+      <div class="wf-input" style="color: var(--ink);">Quanto gastei com alimentação?</div>
+      <div class="wf-button">Perguntar</div>
+
+      <div class="wf-divider"></div>
+
+      <div class="wf-box" style="background: white;">
+        <div style="font-size: 0.75em; color: var(--muted); margin-bottom: 6px;">↳ Resposta</div>
+        <div style="font-size: 0.9em; line-height: 1.5;">
+          Você gastou <b>R$ 487</b> com alimentação em maio.
+          Isso representa <b>39%</b> dos seus gastos do mês.
+          O maior valor foi um mercado de R$ 287,45 no dia 04.
+        </div>
+      </div>
+    </div>
+    <div class="annotation">
+      <b>Decisão UX:</b> Sugestões pré-prontas reduzem o "medo da página em branco". Resposta sempre em prosa curta — não em gráfico. Esse é o teste real da tese conversacional.
+    </div>
+  </div>
+
+</div>
+
+<div class="footnote">
+  <h3>Fluxo principal do MVP</h3>
+  <p>
+    <b>01</b> Login → <b>02</b> Onboarding (1ª vez) → <b>04</b> Dashboard (home) → toque no botão de lançamento →
+    <b>03</b> Escrevo "Gastei 42 no almoço" → IA processa → confirmo → volto pro <b>04</b> Dashboard atualizado →
+    eventualmente abro <b>05</b> Lista pra revisar histórico → eventualmente uso <b>06</b> Pergunte à IA pra consultar.
+  </p>
+  <h3 style="margin-top: 16px;">O que esses wireframes deixam claro (e revelam buracos)</h3>
+  <ul>
+    <li>Não tem tela de "estado vazio" desenhada — quando o usuário acabou de criar conta e não lançou nada ainda, o que ele vê no Dashboard? Pense nisso.</li>
+    <li>Não tem tela de erro — e quando a IA não entende a frase? Decida o copy: "Não entendi, pode reformular?" vs "Acho que você quis dizer... [chute]".</li>
+    <li>Não tem tela de edição de transação — toque na lista abre o quê? Provavelmente o mesmo card da Tela 03, mas com dados preenchidos.</li>
+    <li>Não tem menu de navegação — você vai usar bottom tabs (mobile-first) ou sidebar? Recomendo bottom tabs: Dashboard | Lançar | Lista | Perguntar.</li>
+  </ul>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,426 @@
+{
+  "descricao": "Conjunto de testes para validar parsing de linguagem natural em transações financeiras. Use este arquivo para testar regressões no prompt da IA.",
+  "data_referencia_dos_testes": "2026-05-11 (segunda-feira)",
+  "categorias_disponiveis": [
+    "alimentacao",
+    "transporte",
+    "moradia",
+    "saude",
+    "educacao",
+    "lazer",
+    "compras",
+    "assinaturas",
+    "academia",
+    "servicos",
+    "transferencia",
+    "salario",
+    "freelance",
+    "investimentos",
+    "outros"
+  ],
+  "casos_de_teste": [
+    {
+      "id": 1,
+      "categoria_teste": "despesa basica",
+      "input": "Gastei 42 reais no almoço hoje",
+      "output_esperado": {
+        "tipo": "despesa",
+        "valor": 42.00,
+        "categoria": "alimentacao",
+        "data": "2026-05-11",
+        "descricao": "Almoço",
+        "confianca": "alta"
+      }
+    },
+    {
+      "id": 2,
+      "categoria_teste": "despesa basica sem 'reais'",
+      "input": "Uber 18",
+      "output_esperado": {
+        "tipo": "despesa",
+        "valor": 18.00,
+        "categoria": "transporte",
+        "data": "2026-05-11",
+        "descricao": "Uber",
+        "confianca": "alta"
+      }
+    },
+    {
+      "id": 3,
+      "categoria_teste": "receita basica",
+      "input": "Recebi 1600 do estágio",
+      "output_esperado": {
+        "tipo": "receita",
+        "valor": 1600.00,
+        "categoria": "salario",
+        "data": "2026-05-11",
+        "descricao": "Estágio",
+        "confianca": "alta"
+      }
+    },
+    {
+      "id": 4,
+      "categoria_teste": "data relativa - ontem",
+      "input": "Paguei 89,90 da academia ontem",
+      "output_esperado": {
+        "tipo": "despesa",
+        "valor": 89.90,
+        "categoria": "academia",
+        "data": "2026-05-10",
+        "descricao": "Academia",
+        "confianca": "alta"
+      }
+    },
+    {
+      "id": 5,
+      "categoria_teste": "valor com virgula decimal",
+      "input": "Comprei um lanche de 25,50 no cartão",
+      "output_esperado": {
+        "tipo": "despesa",
+        "valor": 25.50,
+        "categoria": "alimentacao",
+        "data": "2026-05-11",
+        "descricao": "Lanche",
+        "confianca": "alta"
+      }
+    },
+    {
+      "id": 6,
+      "categoria_teste": "freelance",
+      "input": "Ganhei 300 reais de freelance",
+      "output_esperado": {
+        "tipo": "receita",
+        "valor": 300.00,
+        "categoria": "freelance",
+        "data": "2026-05-11",
+        "descricao": "Freelance",
+        "confianca": "alta"
+      }
+    },
+    {
+      "id": 7,
+      "categoria_teste": "valor alto com ponto milhar e virgula decimal",
+      "input": "Paguei a fatura do nubank 1.847,32",
+      "output_esperado": {
+        "tipo": "despesa",
+        "valor": 1847.32,
+        "categoria": "outros",
+        "data": "2026-05-11",
+        "descricao": "Fatura Nubank",
+        "confianca": "alta"
+      }
+    },
+    {
+      "id": 8,
+      "categoria_teste": "marca conhecida - delivery",
+      "input": "Gastei 32 no iFood",
+      "output_esperado": {
+        "tipo": "despesa",
+        "valor": 32.00,
+        "categoria": "alimentacao",
+        "data": "2026-05-11",
+        "descricao": "iFood",
+        "confianca": "alta"
+      }
+    },
+    {
+      "id": 9,
+      "categoria_teste": "PIX recebido com origem",
+      "input": "Recebi pix de 200 da minha mãe ontem",
+      "output_esperado": {
+        "tipo": "receita",
+        "valor": 200.00,
+        "categoria": "transferencia",
+        "data": "2026-05-10",
+        "descricao": "PIX da mãe",
+        "confianca": "alta"
+      }
+    },
+    {
+      "id": 10,
+      "categoria_teste": "linguagem informal sem verbo de gasto",
+      "input": "almocei por 25",
+      "output_esperado": {
+        "tipo": "despesa",
+        "valor": 25.00,
+        "categoria": "alimentacao",
+        "data": "2026-05-11",
+        "descricao": "Almoço",
+        "confianca": "alta"
+      }
+    },
+    {
+      "id": 11,
+      "categoria_teste": "mercado",
+      "input": "Fiz mercado, foram 287,45",
+      "output_esperado": {
+        "tipo": "despesa",
+        "valor": 287.45,
+        "categoria": "alimentacao",
+        "data": "2026-05-11",
+        "descricao": "Mercado",
+        "confianca": "alta"
+      }
+    },
+    {
+      "id": 12,
+      "categoria_teste": "assinatura streaming",
+      "input": "Paguei a Netflix 55,90",
+      "output_esperado": {
+        "tipo": "despesa",
+        "valor": 55.90,
+        "categoria": "assinaturas",
+        "data": "2026-05-11",
+        "descricao": "Netflix",
+        "confianca": "alta"
+      }
+    },
+    {
+      "id": 13,
+      "categoria_teste": "data especifica - dia do mes",
+      "input": "Gastei 150 no cinema dia 5",
+      "output_esperado": {
+        "tipo": "despesa",
+        "valor": 150.00,
+        "categoria": "lazer",
+        "data": "2026-05-05",
+        "descricao": "Cinema",
+        "confianca": "alta"
+      }
+    },
+    {
+      "id": 14,
+      "categoria_teste": "salario mensal",
+      "input": "Caiu o salário, 3200",
+      "output_esperado": {
+        "tipo": "receita",
+        "valor": 3200.00,
+        "categoria": "salario",
+        "data": "2026-05-11",
+        "descricao": "Salário",
+        "confianca": "alta"
+      }
+    },
+    {
+      "id": 15,
+      "categoria_teste": "farmacia/saude",
+      "input": "Remedio 47,80 na drogaria",
+      "output_esperado": {
+        "tipo": "despesa",
+        "valor": 47.80,
+        "categoria": "saude",
+        "data": "2026-05-11",
+        "descricao": "Remédio - Drogaria",
+        "confianca": "alta"
+      }
+    },
+    {
+      "id": 16,
+      "categoria_teste": "valor com 'k' informal",
+      "input": "Recebi 1,5k do cliente",
+      "output_esperado": {
+        "tipo": "receita",
+        "valor": 1500.00,
+        "categoria": "freelance",
+        "data": "2026-05-11",
+        "descricao": "Cliente",
+        "confianca": "media"
+      }
+    },
+    {
+      "id": 17,
+      "categoria_teste": "data relativa - semana passada",
+      "input": "Gastei 80 no barbeiro semana passada",
+      "output_esperado": {
+        "tipo": "despesa",
+        "valor": 80.00,
+        "categoria": "servicos",
+        "data": "2026-05-04",
+        "descricao": "Barbeiro",
+        "confianca": "media",
+        "observacao": "data aproximada - semana passada interpretada como segunda-feira anterior"
+      }
+    },
+    {
+      "id": 18,
+      "categoria_teste": "moradia - aluguel",
+      "input": "Aluguel 1200",
+      "output_esperado": {
+        "tipo": "despesa",
+        "valor": 1200.00,
+        "categoria": "moradia",
+        "data": "2026-05-11",
+        "descricao": "Aluguel",
+        "confianca": "alta"
+      }
+    },
+    {
+      "id": 19,
+      "categoria_teste": "educacao - faculdade",
+      "input": "Paguei a mensalidade da facul, 890",
+      "output_esperado": {
+        "tipo": "despesa",
+        "valor": 890.00,
+        "categoria": "educacao",
+        "data": "2026-05-11",
+        "descricao": "Mensalidade faculdade",
+        "confianca": "alta"
+      }
+    },
+    {
+      "id": 20,
+      "categoria_teste": "transporte combustivel",
+      "input": "Enchi o tanque, 220 reais",
+      "output_esperado": {
+        "tipo": "despesa",
+        "valor": 220.00,
+        "categoria": "transporte",
+        "data": "2026-05-11",
+        "descricao": "Combustível",
+        "confianca": "alta"
+      }
+    },
+    {
+      "id": 21,
+      "categoria_teste": "compras - roupa",
+      "input": "Comprei um tênis 349,90",
+      "output_esperado": {
+        "tipo": "despesa",
+        "valor": 349.90,
+        "categoria": "compras",
+        "data": "2026-05-11",
+        "descricao": "Tênis",
+        "confianca": "alta"
+      }
+    },
+    {
+      "id": 22,
+      "categoria_teste": "ambiguidade - precisa confirmar",
+      "input": "transferi 500",
+      "output_esperado": {
+        "tipo": "despesa",
+        "valor": 500.00,
+        "categoria": "transferencia",
+        "data": "2026-05-11",
+        "descricao": "Transferência",
+        "confianca": "baixa",
+        "observacao": "ambíguo - sistema deve pedir confirmação se é entrada ou saída"
+      }
+    },
+    {
+      "id": 23,
+      "categoria_teste": "valor por extenso parcial",
+      "input": "Gastei cinquenta reais no jantar",
+      "output_esperado": {
+        "tipo": "despesa",
+        "valor": 50.00,
+        "categoria": "alimentacao",
+        "data": "2026-05-11",
+        "descricao": "Jantar",
+        "confianca": "alta"
+      }
+    },
+    {
+      "id": 24,
+      "categoria_teste": "rendimento de investimento",
+      "input": "Rendeu 47,33 no CDB",
+      "output_esperado": {
+        "tipo": "receita",
+        "valor": 47.33,
+        "categoria": "investimentos",
+        "data": "2026-05-11",
+        "descricao": "Rendimento CDB",
+        "confianca": "alta"
+      }
+    },
+    {
+      "id": 25,
+      "categoria_teste": "multiplos itens na mesma frase",
+      "input": "Comprei café 8 e pão 4",
+      "output_esperado": {
+        "tipo": "despesa",
+        "valor": 12.00,
+        "categoria": "alimentacao",
+        "data": "2026-05-11",
+        "descricao": "Café e pão",
+        "confianca": "media",
+        "observacao": "agrupado em transação única - alternativa: criar duas transações"
+      }
+    },
+    {
+      "id": 26,
+      "categoria_teste": "descricao com local",
+      "input": "Gastei 65 no restaurante japonês",
+      "output_esperado": {
+        "tipo": "despesa",
+        "valor": 65.00,
+        "categoria": "alimentacao",
+        "data": "2026-05-11",
+        "descricao": "Restaurante japonês",
+        "confianca": "alta"
+      }
+    },
+    {
+      "id": 27,
+      "categoria_teste": "frase ambigua sem valor claro",
+      "input": "Comprei um café",
+      "output_esperado": {
+        "tipo": "despesa",
+        "valor": null,
+        "categoria": "alimentacao",
+        "data": "2026-05-11",
+        "descricao": "Café",
+        "confianca": "baixa",
+        "observacao": "valor ausente - sistema deve solicitar o valor antes de salvar"
+      }
+    },
+    {
+      "id": 28,
+      "categoria_teste": "frase nao financeira",
+      "input": "Bom dia, tudo bem?",
+      "output_esperado": {
+        "tipo": null,
+        "valor": null,
+        "categoria": null,
+        "data": null,
+        "descricao": null,
+        "confianca": "nenhuma",
+        "observacao": "não é uma transação - sistema deve responder educadamente que espera lançamentos financeiros"
+      }
+    },
+    {
+      "id": 29,
+      "categoria_teste": "data por extenso",
+      "input": "Gastei 90 no dentista dia 3 de maio",
+      "output_esperado": {
+        "tipo": "despesa",
+        "valor": 90.00,
+        "categoria": "saude",
+        "data": "2026-05-03",
+        "descricao": "Dentista",
+        "confianca": "alta"
+      }
+    },
+    {
+      "id": 30,
+      "categoria_teste": "estorno/devolucao",
+      "input": "Me devolveram 50 da compra que cancelei",
+      "output_esperado": {
+        "tipo": "receita",
+        "valor": 50.00,
+        "categoria": "outros",
+        "data": "2026-05-11",
+        "descricao": "Estorno de compra cancelada",
+        "confianca": "media"
+      }
+    }
+  ],
+  "regras_de_parsing": {
+    "campo_confianca": "Indica quão certo o modelo está. 'alta' = pode salvar direto após confirmação visual. 'media' = mostrar destaque amarelo no card. 'baixa' = pedir confirmação explícita do campo duvidoso. 'nenhuma' = não é transação.",
+    "data_default": "Quando não houver data explícita, usar a data atual.",
+    "datas_relativas": "ontem = D-1, anteontem = D-2, semana passada = segunda-feira da semana anterior.",
+    "decimais": "Aceitar tanto 25,50 quanto 25.50. Ponto pode ser separador de milhar (1.847,32 = 1847.32).",
+    "valor_ausente": "Se a frase descreve uma transação mas não tem valor, retornar valor: null e confianca: baixa.",
+    "categoria_default": "Quando não conseguir categorizar com segurança, usar 'outros' e confianca 'baixa'."
+  }
+}
