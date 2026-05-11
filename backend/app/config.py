@@ -2,7 +2,8 @@ from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
-    database_url: str
+    database_url: str                          # asyncpg — runtime da aplicação
+    alembic_database_url: str | None = None   # psycopg2 — exclusivo para migrations
     supabase_url: str
     supabase_service_role_key: str
     anthropic_api_key: str
